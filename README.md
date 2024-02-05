@@ -8,15 +8,15 @@ The models in this repo are trained on the Norwegian pronunciation Lexicon for A
 by the [National Library of Norway](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-23/).
 
 Two models have been developed. One is trained on a full version of the lexicon, including phones, marking of primary and secondary stress, and tone. The other is trained on a
-simplified version where tonal markings and markings of secondary stress are removed. 
+simplified version where tonal markings and markings of secondary stress are removed.
 
 ## Content
-The folder *train/* is too large to store on Github. It can be retrieved as a tar-ball from [this address](https://drive.google.com/file/d/1uWLOxFPn6yGyKU4WViz1E0awJVd3zgZ1/view?usp=sharing).
-* *train/*: Contains the models, as well as auxiliary files used by Phonetisaurus 
+The folder *train/* is too large to store on Github. It can be retrieved as a tar-ball from [this address](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-1_0.tar.gz).
+* *train/*: Contains the models, as well as auxiliary files used by Phonetisaurus
     * *model-wtone-nob.fst* contains full tone and stress specifications
     * *model-notone-nob.fst* lacks tone and secondary stress
 * *lexica/*: Contains various lexica used for training and testing
-    * *NST-total_train.dict* is the training set for *model-wtone-nob.fst*. It contains 612 366 word-transcription pairs (WTP) and constitutes 90% of the unique WTPs in the NST lexicon. 
+    * *NST-total_train.dict* is the training set for *model-wtone-nob.fst*. It contains 612 366 word-transcription pairs (WTP) and constitutes 90% of the unique WTPs in the NST lexicon.
     * *NST-total_test.dict* is the test set for *model-wtone-nob.fst*. It consists of the remaining 10% of the unique WTPs in the NST lexicon, which have been randomly selected.
     * *NST-total-notone_nosecstress_train.dict* is the training set for *model-notone-nob.fst*. It is equal to *NST-total_train.dict*, but markings of tone and secondary stress have been removed
     * *NST-total-notone_nosecstress_test.dict* is the test set for *model-notone-nob.fst*. It is equal to *NST-total_test.dict*, but markings of tone and secondary stress have been removed
@@ -51,12 +51,12 @@ j | J | **j**a
 k | K | **k**ost
 C | KJ | **k**ino
 l | L | **l**and
-l= | LX0 | 
+l= | LX0 |
 m | M | **m**an
-m= | MX0 | 
+m= | MX0 |
 n | N | **n**ord
 N | NG | e**ng**
-n= | NX0 | 
+n= | NX0 |
 o: | OA0 | r**å**
 O | OAH0 | g**å**tt
 2: | OE0 | l**ø**k
@@ -70,15 +70,15 @@ p | P | **p**il
 r | R | **r**ose
 d` | RD | reko**rd**
 l` | RL | pe**rl**e
-l`= | RLX0 | 
+l`= | RLX0 |
 n` | RN | ba**rn**
-n`= | RNX0 | 
+n`= | RNX0 |
 s` | SJ | pe**rs**
 t` | RT | sto**rt**
-r= | RX0 | 
+r= | RX0 |
 s | S | **s**il
 S | SJ | **sj**u
-s= | SX0 | 
+s= | SX0 |
 t | T | **t**id
 u0 | UH0 | r**u**ss
 u0 j | UH0_J | Anh**ui**
@@ -102,4 +102,4 @@ Model | Word Error Rate | Phoneme Error Rate
 The PER calculation is borrowed from [this tutorial](https://fehiepsi.github.io/blog/grapheme-to-phoneme/).
 
 ## Usage
-The models created in this project can be used for any purpose, as long as it is compliant with [Phonetisaurus' license](https://github.com/AdolfVonKleist/Phonetisaurus/blob/master/LICENSE). 
+The models created in this project can be used for any purpose, as long as it is compliant with [Phonetisaurus' license](https://github.com/AdolfVonKleist/Phonetisaurus/blob/master/LICENSE).
