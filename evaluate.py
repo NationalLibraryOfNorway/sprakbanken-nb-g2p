@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-#%%
+# %%
 import re, sys, os
 from collections import defaultdict
 
@@ -9,118 +9,106 @@ import Levenshtein
 from pathlib import Path
 
 
-def load_tsv_dict(filename: str) -> list:
-    """Read a tab separated dictionary file to a list of lists:
-
-    Args:
-        filename (str): text file in this format:
-            overlast	OA2 V AX0 RL AH3 S T
-            tankegymnastikks	T AH2 NG K AX0 G YH0 M N AH0 S T IH3 K S
-            vasallene	V AH0 S AH1 L NX0 AX0
-    Returns:
-        list: format [word, transcription]
-    """
-    return [line.split("\t") for line in Path(filename).read_text().splitlines()]
-
-def load_pronlex(refs_file: str) -> dict:
+def load_pronlex(filename: str) -> dict:
     """Read a tab separated dictionary file to a dict of words and phonemes:
 
     Args:
         filename (str): text file in this format:
-            overlast	OA2 V AX0 RL AH3 S T
-            tankegymnastikks	T AH2 NG K AX0 G YH0 M N AH0 S T IH3 K S
-            vasallene	V AH0 S AH1 L NX0 AX0
+                overlast	OA2 V AX0 RL AH3 S T
+                tankegymnastikks	T AH2 NG K AX0 G YH0 M N AH0 S T IH3 K S
+            or with a score:
+                vasallene	13.56   V AH0 S AH1 L NX0 AX0
     Returns:
-        dict: {"word": ["transcription"]}
+        dict: {"word": "transcription"}
     """
-    refs = {}
+    pronlex = {}
 
-    with open (refs_file, "r", encoding="utf-8") as ifp:
-        for line in ifp:
-            parts = re.split('\t', line.strip())
-            word = parts.pop(0)
-            refs [word] = parts.split(" ")
-            #refs [word] = parts
+    for line in Path(filename).read_text().splitlines():
+        parts = re.split('\t', line.strip())
+        word = parts.pop(0)
+        pronlex [word] = parts.pop()  # the transcription is always last
+    return pronlex
 
-    return refs
 
-#%%
 def phoneme_error_rate(p_seq1, p_seq2):
-    """Source: https://fehiepsi.github.io/blog/grapheme-to-phoneme/"""
+    """Source: https://fehiepsi.github.io/blog/grapheme-to-phoneme/
+
+    Adjusted to return error count and not the error rate.
+    """
     p_vocab = set(p_seq1 + p_seq2)
     p2c = dict(zip(p_vocab, range(len(p_vocab))))
     c_seq1 = [chr(p2c[p]) for p in p_seq1]
     c_seq2 = [chr(p2c[p]) for p in p_seq2]
-    return Levenshtein.distance(''.join(c_seq1),
-                                ''.join(c_seq2)) / len(c_seq2)
-#%%
-def g2pstats(gold, test):
-    """Source: https://github.com/Sprakbanken/g2p-nb/blob/master/g2p_stats.py"""
-
-    total_w = len(gold)
-    total_p = sum([len(v) for v in gold.values])
-    print(total_p)
-    test_per = 0
-    test_wer = 0
-    for word, testtrans in test.items:
-        #testtrans = item.strip().split('\t')[-1].split(' ')
-        #goldtrans = gold[n].strip().split('\t')[-1].split(' ')
-        #testtrans = trans
-        goldtrans = gold[word]
-        per = phoneme_error_rate(testtrans, goldtrans)
-        wer = int(testtrans != goldtrans)
-        test_per += per
-        test_wer += wer
-    #test_per = test_per / total_p * 100
-    #test_wer = test_wer / total_w * 100
-#    print(f'| WER | PER |')
-#    print(f'| --- | --- |')
-#    print(f'| {test_wer} | {test_per} |')
-    return total_w, total_p, test_wer, test_per
-
-#%%
-def print_stats(total_w, total_p, test_w, test_p):
-
-    test_per = test_per / total * 100
-    test_wer = test_wer / total * 100
-    print(f'| WER | PER |')
-    print(f'| --- | --- |')
-    print(f'| {test_wer} | {test_per} |')
+    errors = Levenshtein.distance(''.join(c_seq1),''.join(c_seq2))
+    rate = errors / len(c_seq2)
+    return rate
 
 
-def evaluate(reference_file, predicted_file):
+def word_error_rate(w1: str, w2: str) -> int:
+    """Return 1 for mismatching strings, 0 for identical strings"""
+    return int(w1 != w2)
 
+
+def evaluate(predicted_file, reference_file):
+    """
+    Adjusted to account for different transcription lengths,
+    so PER is calculated as the sum of phoneme errors divided by sum of all phonemes.
+    """
     test = load_pronlex(predicted_file)
     gold = load_pronlex(reference_file)
 
-    if not len(test) == len(gold):
-        sys.exit('test and gold file do not have the same length')
-    print_stats(*g2pstats(gold, test))
+    phone_errors = 0
+    word_errors = 0
+    total_phones = 0
 
+    for word, prediction in test.items():
+        reference = gold[word]
+        refsplit = reference.split(" ")
+        reflen = len(refsplit)
+        total_phones += reflen
 
-#%%
-if __name__ == "__main__":
-    import argparse
+        phone_errors += reflen*phoneme_error_rate(prediction.split(" "), refsplit)
+        word_errors += word_error_rate(prediction, reference)
 
-    example = "{0} --lexicon e_written".format (sys.argv [0])
-    parser = argparse.ArgumentParser (description=example)
-    parser.add_argument ("--lexicon", "-l", help="Lexicon dialect variant.",
-                         default="e_written")
-    parser.add_argument ("--lexicon", "-l", help="Lexicon dialect variant.",
-                         default="e_written")
-
-    args = parser.parse_args ()
-    lexicon = args.lexicon
-
-    #%%
-
-    reference_file = f"reference_data/NB-uttale_{lexicon}_test.dict"
-    predicted_file = f"predicted_data/predicted_nb_{lexicon}.dict"
-
-    #%%
-    #compute_eval(reference_file, predicted_file)
-    #%%
-    evaluate(reference_file, predicted_file)
+    total_words  = len(test)
+    per = phone_errors / total_phones * 100
+    wer = word_errors / total_words * 100
+    return wer, per
 
 
 # %%
+if __name__ == "__main__":
+    # %%
+    import argparse
+
+    lexica = [
+        "e_written",
+        "e_spoken",
+        "sw_written",
+        "sw_spoken",
+        "w_written",
+        "w_spoken",
+        "t_written",
+        "t_spoken",
+        "n_written",
+        "n_spoken",
+    ]
+    example = "{0} --lexicon e_written".format (sys.argv [0])
+    parser = argparse.ArgumentParser (description=example)
+    parser.add_argument(
+        "--lexicon",
+        "-l",
+        help="Lexicon pronunciation variant, with a letter for the dialect area (e, w, sw, t, n) and a style (written, spoken).",
+        default=lexica,
+        nargs="*",
+    )
+    args = parser.parse_args ()
+
+    print(f'| lexicon | WER | PER |')
+    print(f'| --- | --- | --- |')
+
+    for lexicon in args.lexicon:
+        reference_file = f"data/NB-uttale_{lexicon}_test.dict"
+        predicted_file = f"data/predicted_nb_{lexicon}.dict"
+        wer, per = evaluate(predicted_file, reference_file)
+        print(f'| {lexicon} | {wer} | {per} |')
