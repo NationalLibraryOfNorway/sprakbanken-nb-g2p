@@ -104,11 +104,11 @@ if __name__ == "__main__":
     )
     args = parser.parse_args ()
 
-    print(f'| lexicon | WER | PER |')
+    print(f"| Model | Word Error Rate | Phoneme Error Rate |")
     print(f'| --- | --- | --- |')
 
     for lexicon in args.lexicon:
         reference_file = f"data/NB-uttale_{lexicon}_test.dict"
         predicted_file = f"data/predicted_nb_{lexicon}.dict"
         wer, per = evaluate(predicted_file, reference_file)
-        print(f'| {lexicon} | {wer} | {per} |')
+        print(f'| *nb_{lexicon}.fst* | {wer} | {per} |')

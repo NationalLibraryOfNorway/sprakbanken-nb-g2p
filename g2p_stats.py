@@ -20,8 +20,8 @@ def print_stats(test, gold):
     test_per = 0
     test_wer = 0
     for n, item in enumerate(test):
-        testtrans = item.strip().split('\t')[1].split(' ')
-        goldtrans = gold[n].strip().split('\t')[1].split(' ')
+        testtrans = item.strip().split('\t')[-1].split(' ')
+        goldtrans = gold[n].strip().split('\t')[-1].split(' ')
         per = phoneme_error_rate(testtrans, goldtrans)
         wer = int(testtrans != goldtrans)
         test_per += per
@@ -31,13 +31,13 @@ def print_stats(test, gold):
     print(f'WER: {test_wer}\nPER: {test_per}')
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     try:
         goldfile = sys.argv[1]
         testfile = sys.argv[2]
     except IndexError:
         exit('Please provide filepath')
-    
+
     with open(goldfile, 'r') as gf, open(testfile, 'r') as tf:
         goldlines = gf.readlines()
         testlines = tf.readlines()
