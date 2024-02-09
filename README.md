@@ -66,7 +66,7 @@ You can give a pronunciation variant (e.g. `-l e_spoken`) to calculate stats for
 - PER is calculated as the count of all errors (1 error = a mismatching phoneme) divided by the total count of phonemes in the reference file.
 
 ```shell
-python evalutate.py
+python evaluate.py
 ```
 
 | Model | Word Error Rate | Phoneme Error Rate |
