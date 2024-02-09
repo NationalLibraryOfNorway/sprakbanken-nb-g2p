@@ -1,6 +1,6 @@
 # Grafem-til-fonem-modeller for norsk bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/README.md)
 
 Dette repoet inneholder G2P-modeller for norsk bokmål, som produserer fonemiske transkripsjoner for talenære uttalevarianter (som i vanlige samtaler: `spoken`) eller skriftnære uttalevarianter (som i tekstopplesing `written`) for 5 forskjellige dialektområder:
 
@@ -22,12 +22,9 @@ Du trenger kun å kjøre koden i disse avsnittene:
 Uttaleleksikonene som ble brukt til å trene G2P-modellene er fritt tilgjengelige fra Språkbanken ressurskatalog: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/).
 De kan også genereres opp med data og kode fra Github-repoet [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale).
 
-[Modellene og testdata](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) kan lastes ned fra Språkbankens ressurskatalog, som en komprimert `.tar.gz`-fil.
+Modellene og testdata kan lastes ned fra [release v2.0](https://github.com/Sprakbanken/g2p-nb/releases/tag/v2.0) eller fra Språkbankens ressurskatalog:  [G2P-no-2_0.tar.gz](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz).
 
 Pakk dem ut og plasser mappene "data" og "models" i din lokale klone av dette repoet.
-```
-tar -xvf G2P-no-2_0.tar.gz
-```
 
 ## Innhold
 - `models/`: inneholder modellene, samt andre filer Phonetisaurus bruker
