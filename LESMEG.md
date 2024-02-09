@@ -107,11 +107,10 @@ python g2p_stats.py data/NB-uttale_e_spoken_test.dict data/predicted_nb_e_spoken
 ### Transkripsjonsstandard
 
 G2P-modellene har blitt trent på data med transkripsjonsstandarden NoFAbet , som er lettere å lese for mennesker enn X-SAMPA. 
-NoFAbet er delvis basert på [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) og ble utviklet for Nasjonalbiblioteket av [Nate Young](https://www.nateyoung.se/)
+NoFAbet er delvis basert på [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) og ble utviklet for Nasjonalbiblioteket av [Nate Young](https://www.nateyoung.se/) i forbindelse med utviklingen av [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), en forced alignment-modell for norsk.
+Tabellen nedenfor viser ekvivalente symboler for notasjonene X-SAMPA, IPA og NoFAbet. 
 
-....in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
-
-### X-SAMPA-IPA-NoFAbet equivalence table
+### X-SAMPA-IPA-NoFAbet konverteringstabell
 X-SAMPA | IPA | NoFAbet | Example
 --- | --- | --- |---
 A: | ɑː | AA0 | b**a**d
@@ -172,8 +171,8 @@ w | w | W | **W**ashington
 Y | y | YH0 | n**y**tt
 y: | yː | YY0 | n**y**
 
-Unstressed syllables are marked with a 0 after the vowel or consonant syllable nucleus. The nucleus is marked with a *1* for tone 1 and a *2* for tone 2. Secondary stress is marked with *3*. 
+Trykklette stavelser er markert med 0 etter stavelseskjernen. Stavelseskjernen er markert med *1* ved tonem 1 og *2* ved tonem 2. Sekundærstress merkes med *3*. 
 
-## License
+## Lisens
 
-These models are shared with a [Creative_Commons-ZERO (CC-ZERO)](https://creativecommons.org/publicdomain/zero/1.0/) license, and so are the lexica they are trained on. The models can be used for any purpose, as long as it is compliant with Phonetisaurus' license.
+Modellene utvikla i dette prosjektet er offentlig eiendom med lisensen [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/). De kan brukes til et hvilket som helst formål. Det kan også uttaleleksikonene som modellene er trent på. Se for øvrig [lisensen til Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/blob/master/LICENSE).
