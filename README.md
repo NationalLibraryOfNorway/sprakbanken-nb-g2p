@@ -1,6 +1,6 @@
 # Grapheme to Phoneme models for Norwegian Bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p_models/blob/main/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p_models/blob/main/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
 
 This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations) and *close-to-written* pronunciations (such as when reading text aloud) for 5 different dialect areas:
 
