@@ -1,6 +1,6 @@
 # Grafem-til-fonem-modeller for norsk bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-grey)](https://github.com/Sprakbanken/g2p-nb/blob/master/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-blue)](https://github.com/Sprakbanken/g2p-nb/blob/master/README.md)
 
 Dette repoet inneholder G2P-modeller for norsk bokmål, som produserer fonemiske transkripsjoner for talenære uttalevarianter (som i vanlige samtaler: `spoken`) eller skriftnære uttalevarianter (som i tekstopplesing `written`) for 5 forskjellige dialektområder:
 
