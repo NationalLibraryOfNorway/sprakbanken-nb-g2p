@@ -35,8 +35,8 @@ tar -xvf G2P-no-2_0.tar.gz
     - `nb_*.o8.arpa`: 8-gram-modeller for fonemsekvenser som Phonetisaurus bruker i treningsprosessen.
     - `nb_*.corpus`: Sammenstilte (eng. *aligned*) grafemer og fonemer fra leksikonene.
 - `data/`: inneholder leksika for trening og testing, samt utdata fra modellene på testsettet.
-    - `NB-uttale_*_train.dict` er treningssettene for `models/nb_*.fst`. De inneholder 543 495 ortografi-transkripsjon-par (OTP), og utgjør 80% av alle unike OTP-er i NST-leksikonet.
-    - `NB-uttale_*_test.dict` er testsettene for `models/nb_*.fst`. De inneholder de gjenstående 20% av OTP-ene i NST-leksikonet, altså 135 787 OTP-er.
+    - `NB-uttale_*_train.dict` er treningssettene for `models/nb_*.fst`. De inneholder 543 495 ortografi-transkripsjon-par (OTP), og utgjør 80% av alle unike OTP-er i leksikonet.
+    - `NB-uttale_*_test.dict` er testsettene for `models/nb_*.fst`. De inneholder de gjenstående 20% av OTP-ene i leksikonet, altså 135 787 OTP-er.
     - `predicted_nb_*.dict` er testsettet med transkripsjoner predikert av modellene.
     - `wordlist_test.txt` er ordlisten til testsettet, som modellen kjøres på og genererer transkripsjonsforslag for.
 - `evaluate.py`: evalueringsskript som er implementert på nytt for å evaluere disse modellene.
