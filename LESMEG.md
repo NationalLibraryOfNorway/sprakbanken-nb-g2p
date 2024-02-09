@@ -1,56 +1,60 @@
-# Grapheme to Phoneme models for Norwegian Bokmål
+# Grafem-til-fonem-modeller for norsk bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
 
-This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations) and *close-to-written* pronunciations (such as when reading text aloud) for 5 different dialect areas:
+Dette repoet inneholder G2P-modeller for norsk bokmål, som produserer fonemiske transkripsjoner for talenære uttalevarianter (som i vanlige samtaler) eller skriftnære uttalevarianter (som i tekstopplesing) for 5 forskjellige dialektområder: 
 
-1. East Norwegian
-2. South West Norwegian
-3. West Norwegian
-4. Central Norwegian (Trøndersk)
-5. North Norwegian
+1. Østnorsk
+2. Sørvestnorsk
+3. Vestnorsk
+4. Trøndersk
+5. Nordnorsk
 
-[^1]: Bokmål is the most widely used written standard for Norwegian. The other written standard is Nynorsk. Read more on [Wikipedia](https://en.wikipedia.org/wiki/Norwegian_orthography).
-
-
-## Setup
-Follow installation instructions from  [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/tree/kaldi). You only need the steps  "Next grab and install OpenFst-1.7.2" and "Checkout the latest Phonetisaurus from master and compile without bindings".
-
+## Oppsett
+Følg installasjonsinstruksjoner fra [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/tree/kaldi). 
+Du trenger kun å kjøre koden i disse avsnittene: 
+- "Next grab and install OpenFst-1.7.2"
+-  "Checkout the latest Phonetisaurus from master and compile without bindings"
 
 ## Data
-The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz`-file.
+[Modellene og testdata](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) kan lastes ned fra Språkbankens ressurskatalog, som en komprimert `.tar.gz`-fil.
 
-The pronunciation lexica that were used to train the G2P-models are free to download and use from Språkbanken's resource catalogue: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/)
+Pakk dem ut og plasser mappene "data" og "models" i din lokale klone av dette repoet. 
+```
+tar -xvf G2P-no-2_0.tar.gz
+```
 
-For more information about the data, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
+Uttaleleksikonene som ble brukt til å trene G2P-modellene er fritt tilgjengelige fra Språkbanken ressurskatalog: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/). 
+De kan også genereres opp med data og kode fra Github-repoet [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale).
 
-The data was split into test and train subsets with [`sklearn.model_selection.train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) and a 80% / 20% train/test ratio.
+Leksikonene ble delt i test- og treningssett med  [`sklearn.model_selection.train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) og en fordeling på 80% treningsdata/ 20% testdata.
 
-## Usage
+## Bruk
 
 ```shell
 phonetisaurus-apply --model models/nb_e_spoken.fst --word_list data/wordlist_test.txt  -n 1  -v  > output.txt
 ```
 
-- Input data (`--word_list`) should be a list of newline-delimited words. See the file [`data/wordlist_test.txt`](./data/wordlist_test.txt) for an example.
-- The trained G2P-models are `.fst` files located in the `models` folder. The same folder also contains aligned `.corpus` files and phoneme 8-gram models (`.arpa` files), also from the `Phonetisaurus` training process.
-- `-n` lets you adjust the number of most probable predictons.
+- Inndata (`--word_list`) burde være en tekstfil med linjeseparerte ord. Se for eksempel [`data/wordlist_test.txt`](./data/wordlist_test.txt). 
+- De trente modellene er `.fst`-filer i `models`-mappen. I samme mappe ligger også `.corpus`-filer og 8-gram-modeller for fonemsekvenser (`.arpa`-filer) som kommer fra treningsprosessen  til Phonetisauraus.
+- `-n`-argumentet angir hvor mange av de mest sannsynlige transkripsjonsforslagene som skal skrives til utdata.
 
-## Evaluation
+## Evaluering
 
-There are 2 scripts to calculate WER and PER statistics, which give slightly different results.
+Det er to skript i repoet for å regne ut Word Error Rate (WER) og Phoneme Error Rate (PER), og som gir litt ulike svar pga. implementasjonen av utregningene. 
 
 ### `evaluate.py`
 
-Calulcates stats for all the provided models by default.
-You can give a pronunciation variant (e.g. `-l e_spoken`) to calculate stats for specific models.
-
-- The WER score is calculated as the count of all mismatching transcriptions (1 error = 1 mismatching word) divided by the count of all words in the reference, i.e. a `*_test.dict` file.
-- PER is calculated as the count of all errors (1 error = a mismatching phoneme) divided by the total count of phonemes in the reference file.
+Regner statistikk for alle modellene dersom ingen argumenter er gitt. 
 
 ```shell
 python evalutate.py
 ```
+
+Med `-l`-argumentet kan du få statistikk for spesifikke modeller, f.eks. `-l e_spoken`.
+
+- **WER** er antall feil transkripsjoner fordelt på totalt antall ord i testdata. 1 feil = 1 ord.
+- **PER** er antall feil fonemer for alle transkripsjonene, fordelt på totalt antall fonemer i testdata. 1 feil = 1 fonem. 
 
 | Model | Word Error Rate | Phoneme Error Rate |
 | --- | --- | --- |
@@ -69,16 +73,15 @@ python evalutate.py
 
 ### `g2p_stats.py`
 
+Regner ut WER og PER for to inputfiler: 
+1. Referansefila /testdata, f.eks. `data/NB-uttale_e_spoken_test.dict`
+2. Modellens transkripsjonsforslag, f.eks. `output.txt` fra kommandoen i [Bruk](#bruk), eller `data/predicted_nb_e_spoken.dict`.
 
-Calculates WER and PER for two input files.
-1. The reference file (e.g. `data/NB-uttale_e_spoken_test.dict`)
-2. The model prediction file (e.g. `output.txt` from the command in [Usage](#usage), or `data/predicted_nb_e_spoken.dict`).
 
-- The WER score is calculated as the count of errors (1 error = 1 mismatching word) divided by the count of all words in the predictions, i.e. a `predicted_*.dict` file.
-- PER is calculated as the sum of phone error rates for each transcription,  divided by the total count of words in the predictions.
+- **WER** er antall feil transkripsjoner fordelt på totalt antall ord i modellens forslag. 1 feil = 1 ord.
+- **PER** er summen av PER for hver transkripsjonen, fordelt på totalt antall ord i modellens forslag. 1 feil = 1 fonem. 
 
->**NOTE**: This method doesn't take transcription lengths into account, so a transcription with 2 phonemes where 1 is wrong has a 0.5 PER while a word with length 10 with 1 error has a 0.1 PER, and the average score for the two words would be 0.35.
-
+> **OBS**: Denne metoden tar ikke hensyn til ulik lengde på transkripsjonene. En transkripsjon med 2 fonemer der 1 er feil får en 50% PER, mens et ord på 10 fonemer med 1 feil får 10% PER, og gjennomsnittet blir 35%. Om man regner antall feil på totalt antall fonemer, blir gjennomsnittet for de to 16,7%. 
 
 ```shell
 python g2p_stats.py data/NB-uttale_e_spoken_test.dict data/predicted_nb_e_spoken.dict
@@ -99,10 +102,14 @@ python g2p_stats.py data/NB-uttale_e_spoken_test.dict data/predicted_nb_e_spoken
 | *nb_n_written.fst* | 14.059519688924565 | 2.7190289235234104 |
 | *nb_n_spoken.fst* | -- | -- |
 
-> **NOTE**: *The t_spoken and n_spoken model predictions are not the same length as the reference file, which causes the script to exit.*
+> **OBS**: *Modellforslagene fra t_spoken og n_spoken har ikke samme antall ord som testdata, som gjør at skriptet krasjer.*
 
-### Transcription standard
-The G2p models have been trained on the NoFAbet transcription standard which is easier to read by humans than X-SAMPA. NoFAbet is in part based on [2-letter ARPAbet](https://en.wikipedia.org/wiki/ARPABET) and is made by [Nate Young](https://www.nateyoung.se/) for the National Library of Norway in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
+### Transkripsjonsstandard
+
+G2P-modellene har blitt trent på data med transkripsjonsstandarden NoFAbet , som er lettere å lese for mennesker enn X-SAMPA. 
+NoFAbet er delvis basert på [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) og ble utviklet for Nasjonalbiblioteket av [Nate Young](https://www.nateyoung.se/)
+
+....in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
 
 ### X-SAMPA-IPA-NoFAbet equivalence table
 X-SAMPA | IPA | NoFAbet | Example
