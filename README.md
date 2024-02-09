@@ -42,7 +42,7 @@ There are 2 scripts to calculate WER and PER statistics, which give slightly dif
 
 ### `evaluate.py`
 
-Calulcates stats for all the provided models by default.
+Calculates stats for all the provided models by default.
 You can give a pronunciation variant (e.g. `-l e_spoken`) to calculate stats for specific models.
 
 - The WER score is calculated as the count of all mismatching transcriptions (1 error = 1 mismatching word) divided by the count of all words in the reference, i.e. a `*_test.dict` file.
@@ -102,7 +102,7 @@ python g2p_stats.py data/NB-uttale_e_spoken_test.dict data/predicted_nb_e_spoken
 > **NOTE**: *The t_spoken and n_spoken model predictions are not the same length as the reference file, which causes the script to exit.*
 
 ### Transcription standard
-The G2p models have been trained on the NoFAbet transcription standard which is easier to read by humans than X-SAMPA. NoFAbet is in part based on [2-letter ARPAbet](https://en.wikipedia.org/wiki/ARPABET) and is made by [Nate Young](https://www.nateyoung.se/) for the National Library of Norway in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
+The G2P models have been trained on the NoFAbet transcription standard which is easier to read by humans than X-SAMPA. NoFAbet is in part based on [2-letter ARPAbet](https://en.wikipedia.org/wiki/ARPABET) and is made by [Nate Young](https://www.nateyoung.se/) for the National Library of Norway in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
 
 ### X-SAMPA-IPA-NoFAbet equivalence table
 X-SAMPA | IPA | NoFAbet | Example
@@ -161,7 +161,7 @@ w | w | W | **W**ashington
 Y | y | YH0 | n**y**tt
 y: | yː | YY0 | n**y**
 
-Unstressed syllables are marked with a 0 after the vowel or consonant syllable nucleus. The nucleus is marked with a *1* for tone 1 and a *2* for tone 2. Secondary stress is marked with *3*. 
+Unstressed syllables are marked with a 0 after the vowel or syllabic consonant. The nucleus is marked with a *1* for tone 1 and a *2* for tone 2. Secondary stress is marked with *3*. 
 
 ## License
 
