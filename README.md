@@ -17,6 +17,15 @@ This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic 
 Follow installation instructions from  [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/tree/kaldi). You only need the steps  "Next grab and install OpenFst-1.7.2" and "Checkout the latest Phonetisaurus from master and compile without bindings".
 
 
+## Data
+The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz-file.
+
+The pronunciation lexica that were used to train the G2P-models are free to download and use from Språkbanken's resource catalogue: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/)
+
+For more information about the data, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
+
+The data was split into test and train subsets with [`sklearn.model_selection.train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) and a 80% / 20% train/test ratio.
+
 ## Usage
 
 ```shell
@@ -91,15 +100,6 @@ python g2p_stats.py data/NB-uttale_e_spoken_test.dict data/predicted_nb_e_spoken
 | *nb_n_spoken.fst* | -- | -- |
 
 > **NOTE**: *The t_spoken and n_spoken model predictions are not the same length as the reference file, which causes the script to exit.*
-
-## Data
-
-The pronunciation lexica that were used to train the G2P-models are free to download and use from Språkbanken's resource catalogue: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/)
-
-For more information about the data, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
-
-The data was split into test and train subsets with [`sklearn.model_selection.train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) and a 80% / 20% train/test ratio.
-
 
 ### Transcription standard (må oppdateres)
 Although the original NST lexicon uses X-SAMPA as a transcription standard, an equivalent standard is used in this project., which is easier to read by humans, *NoFAbet*. NoFAbet is in part based on [2-letter ARPAbet](https://en.wikipedia.org/wiki/ARPABET) and is made by [Nate Young](https://www.nateyoung.se/) for the National Library of Norway in connection with the development of [*NoFA*](https://www.nb.no/sprakbanken/en/resource-catalogue/oai-nb-no-sbr-59/), a forced aligner for Norwegian. The equivalence table below contains X-SAMPA, IPA and NoFAbet notatations.
