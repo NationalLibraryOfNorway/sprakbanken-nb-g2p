@@ -18,7 +18,7 @@ Follow installation instructions from  [Phonetisaurus](https://github.com/AdolfV
 
 
 ## Data
-The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz-file.
+The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz`-file.
 
 The pronunciation lexica that were used to train the G2P-models are free to download and use from Språkbanken's resource catalogue: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/)
 
