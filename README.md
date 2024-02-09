@@ -2,13 +2,13 @@
 
 [![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
 
-This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations) and *close-to-written* pronunciations (such as when reading text aloud) for 5 different dialect areas:
+This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations: `spoken`) and *close-to-written* pronunciations (such as when reading text aloud: `written`) for 5 different dialect areas:
 
-1. East Norwegian
-2. South West Norwegian
-3. West Norwegian
-4. Central Norwegian (Trøndersk)
-5. North Norwegian
+1. East Norwegian (`e`)
+2. South West Norwegian (`sw`)
+3. West Norwegian (`w`)
+4. Central Norwegian (Trøndersk) (`t`)
+5. North Norwegian (`n`)
 
 [^1]: Bokmål is the most widely used written standard for Norwegian. The other written standard is Nynorsk. Read more on [Wikipedia](https://en.wikipedia.org/wiki/Norwegian_orthography).
 
@@ -18,13 +18,32 @@ Follow installation instructions from  [Phonetisaurus](https://github.com/AdolfV
 
 
 ## Data
-The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz`-file.
 
 The pronunciation lexica that were used to train the G2P-models are free to download and use from Språkbanken's resource catalogue: [NB Uttale](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-79/)
 
-For more information about the data, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
+For more information about the lexica, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
 
-The data was split into test and train subsets with [`sklearn.model_selection.train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) and a 80% / 20% train/test ratio.
+The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz`-file.
+
+Extract them and place the folders `data` and `models` in your local clone of this repo.
+
+```
+tar -xvf G2P-no-2_0.tar.gz
+```
+
+## Content
+- `models/`: contains the models, as well as auxiliary files used by Phonetisaurus
+    - `nb_*.fst`: model files to use with `phonetisaurus-apply`. The expansion of `*` is a string of a dialect and pronunciation style, e.g. `e_spoken` or `t_written`.
+    - `nb_*.o8.arpa`: 8-gram-models for phoneme sequences that Phonetisaurus uses during training.
+    - `nb_*.corpus`: aligned graphemes and phonemes from the lexica.
+- `data/`: contains various lexica used for training and testing, including predictions from the models on the test set
+    - `NB-uttale_*_train.dict`: training data for `models/nb_*.fst`. Each file contains 543 495 word-transcription pairs (WTP), and makes up 80% of all unique WTPs in the lexicon.
+    - `NB-uttale_*_test.dict`: test data for `models/nb_*.fst`. Each file contains the remaining 20% of the WTPs in the lexicon, i.e. 135 787 WTPs.
+    - `predicted_nb_*.dict`: The words from the testdata with the model's predicted transriptions.
+    - `wordlist_test.txt`: The orthographic words from the test data, which the models predict transcriptions for.
+- `evaluate.py`: script to evaluate the models. The method for calculating WER and PER were re-implemented.
+- `g2p_stats.py`: script to evaluate the models from V1.0, which can be used to compare results between these models and the NDT models (with and without tone and stress markers) from version 1.
+- `LICENSE`: The license text for CC0, which this resource is distributed with.
 
 ## Usage
 
@@ -165,7 +184,7 @@ w | w | W | **W**ashington
 Y | y | YH0 | n**y**tt
 y: | yː | YY0 | n**y**
 
-Unstressed syllables are marked with a 0 after the vowel or consonant syllable nucleus. The nucleus is marked with a *1* for tone 1 and a *2* for tone 2. Secondary stress is marked with *3*. 
+Unstressed syllables are marked with a 0 after the vowel or consonant syllable nucleus. The nucleus is marked with a *1* for tone 1 and a *2* for tone 2. Secondary stress is marked with *3*.
 
 ## License
 
