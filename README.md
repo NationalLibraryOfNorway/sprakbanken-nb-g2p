@@ -1,6 +1,6 @@
 # Grapheme to Phoneme models for Norwegian Bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/README.md)
 
 This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations: `spoken`) and *close-to-written* pronunciations (such as when reading text aloud: `written`) for 5 different dialect areas:
 
@@ -23,13 +23,11 @@ The pronunciation lexica that were used to train the G2P-models are free to down
 
 For more information about the lexica, see the Github repo: [Sprakbanken/nb_uttale](https://github.com/Sprakbanken/nb_uttale)
 
-The [models and data](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz) can be downloaded from Språkbanken's resource catalogue as a `.tar.gz`-file.
+The models and data can be downloaded from [release v2.0](https://github.com/Sprakbanken/g2p-nb/releases/tag/v2.0)
+or from Språkbanken's resource catalogue [G2P-no-2_0.tar.gz](https://www.nb.no/sbfil/verktoy/g2p_no/G2P-no-2_0.tar.gz).
 
 Extract them and place the folders `data` and `models` in your local clone of this repo.
 
-```
-tar -xvf G2P-no-2_0.tar.gz
-```
 
 ## Content
 - `models/`: contains the models, as well as auxiliary files used by Phonetisaurus
