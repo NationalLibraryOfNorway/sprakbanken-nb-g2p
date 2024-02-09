@@ -63,7 +63,7 @@ Det er to skript i repoet for å regne ut Word Error Rate (WER) og Phoneme Error
 Regner statistikk for alle modellene dersom ingen argumenter er gitt.
 
 ```shell
-python evalutate.py
+python evaluate.py
 ```
 
 Med `-l`-argumentet kan du få statistikk for spesifikke modeller, f.eks. `-l e_spoken`.
