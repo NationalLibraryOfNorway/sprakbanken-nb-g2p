@@ -11,7 +11,6 @@ Dette repoet inneholder G2P-modeller for norsk bokmål, som produserer fonemiske
 5. Nordnorsk (`n`)
 
 
-
 ## Oppsett
 Følg installasjonsinstruksjoner fra [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/tree/kaldi).
 Du trenger kun å kjøre koden i disse avsnittene:
@@ -39,6 +38,7 @@ tar -xvf G2P-no-2_0.tar.gz
     - `NB-uttale_*_train.dict` er treningssettene for `models/nb_*.fst`. De inneholder 543 495 ortografi-transkripsjon-par (OTP), og utgjør 80% av alle unike OTP-er i NST-leksikonet.
     - `NB-uttale_*_test.dict` er testsettene for `models/nb_*.fst`. De inneholder de gjenstående 20% av OTP-ene i NST-leksikonet, altså 135 787 OTP-er.
     - `predicted_nb_*.dict` er testsettet med transkripsjoner predikert av modellene.
+    - `wordlist_test.txt` er ordlisten til testsettet, som modellen kjøres på og genererer transkripsjonsforslag for.
 - `evaluate.py`: evalueringsskript som er implementert på nytt for å evaluere disse modellene.
 - `g2p_stats.py`: evalueringsskript fra V1.0, som kan brukes for å sammenligne disse modellene med NST-modellene (med og uten markering av trykk og tone) i versjon 1.
 - `LICENSE`: Lisensteksten for CC0, som denne ressursen distribueres med.
