@@ -1,6 +1,6 @@
 # Grapheme to Phoneme models for Norwegian Bokmål
 
-[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/v2.0/README.md)
+[![lang-button](https://img.shields.io/badge/-Norsk-blue)](https://github.com/Sprakbanken/g2p-nb/blob/master/LESMEG.md) [![lang-button](https://img.shields.io/badge/-English-grey)](https://github.com/Sprakbanken/g2p-nb/blob/master/README.md)
 
 This repo contains G2P models for Norwegian bokmål[^1], which produce phonemic transcriptions for *close-to-spoken* pronunciations (such as in spontaneous conversations: `spoken`) and *close-to-written* pronunciations (such as when reading text aloud: `written`) for 5 different dialect areas:
 
@@ -66,7 +66,7 @@ You can give a pronunciation variant (e.g. `-l e_spoken`) to calculate stats for
 - PER is calculated as the count of all errors (1 error = a mismatching phoneme) divided by the total count of phonemes in the reference file.
 
 ```shell
-python evalutate.py
+python evaluate.py
 ```
 
 | Model | Word Error Rate | Phoneme Error Rate |
