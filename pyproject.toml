@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "g2p_nb"
+version = "0.1.0"
+description = "Grapheme-to-phoneme models for Norwegian bokmål to dialectal phonemic transcriptions"
+authors = ["Ingerid Dale <ingerid.dale@nb.no>"]
+license = "CC0 1.0 Deed"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Levenshtein = "^0.25.1"
+phonetisaurus = "^0.3.0"
+google-cloud-storage = "^2.16.0"
+convert-pa = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
