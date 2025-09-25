@@ -7,7 +7,7 @@ authors = [
     {name = "Ingerid Dale", email = "ingerid.dale@nb.no"},
     {name = "Marie Iversdatter Røsok", email = "marie.rosok@nb.no" }
 ]
-dependencies = ["Levenshtein>=0.27.1"]
+dependencies = ["Levenshtein>=0.27.1", "convert-pa>=0.1.0", "google-cloud-storage>=3.4.0"]
 requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "CC0"}
