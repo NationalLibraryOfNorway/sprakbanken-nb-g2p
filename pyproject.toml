@@ -1,0 +1,21 @@
+[project]
+name = "nb_g2p"
+version = "2.0.0"
+description = "Transcribe Norwegian dialects phonemically from bokmål text."
+authors = [
+    {name = "Språkbanken", email = "sprakbanken@nb.no"},
+    {name = "Ingerid Dale", email = "ingerid.dale@nb.no"},
+    {name = "Marie Iversdatter Røsok", email = "marie.rosok@nb.no" }
+]
+dependencies = ["Levenshtein>=0.27.1"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "CC0"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
