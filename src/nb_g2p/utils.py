@@ -115,7 +115,7 @@ def convert_to_syllables(phonemes: list, ipa: bool = False) -> list:
     return syllables
 
 
-def transcribe(text, dialect="e", style="written", full_annotation=False) -> Generator:
+def transcribe(text, dialect="e", style="written", full_annotation=False) -> Iterable:
     """Transcribe a text of whitespace-separated words using a pre-trained g2p model."""
     text = strip_punctuation(text)
     words = text.split()
@@ -155,7 +155,16 @@ def transcribe_words(
 
 
 def split_paragraphs(text: str) -> list:
-    """Split a text into paragraphs and paragraphs into lines."""
+    """
+    Splits a text into paragraphs, and each paragraph into lines.
+    A paragraph is defined as a block of text separated by two or more newline characters.
+    Each paragraph is further split into lines based on single newline characters.
+    Trailing whitespace is removed from each line and paragraph.
+    Args:
+        text: The input text to split.
+    Returns:
+        list: A list of paragraphs, where each paragraph is a list of its lines as strings.
+    """
     return [
         [line.rstrip() for line in paragraph.rstrip().splitlines()]
         for paragraph in re.split("\n{2,}", text)
