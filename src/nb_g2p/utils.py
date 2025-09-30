@@ -9,7 +9,7 @@ import logging
 import re
 import string
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Iterable
 
 import phonetisaurus
 from convert_pa import convert_nofabet, nofabet_to_ipa
@@ -138,8 +138,17 @@ def annotate_transcriptions(transcription: list) -> Generator:
 
 def transcribe_words(
     words: list[str], dialect: str = "e", style: str = "written"
-) -> Generator:
-    """Transcribe a list of words using a pre-trained g2p model."""
+) -> Iterable:
+    """Transcribe a list of words using a pre-trained grapheme-to-phoneme (G2P) model.
+
+    Args:
+        words: A list of words to be transcribed.
+        dialect: The dialect code to use for transcription. Defaults to "e".
+        style: The style of transcription ("written" or other supported styles). Defaults to "written".
+
+    Returns:
+        Iterable: An iterable containing the phonetic transcriptions of the input words.
+    """
     model_path = download_g2p_model(dialect=dialect, style=style)
     transcriptions = phonetisaurus.predict(words, model_path=model_path)
     return transcriptions
@@ -155,6 +164,18 @@ def split_paragraphs(text: str) -> list:
 
 
 def transcribe_file(file: str | Path, dialect: str = "e", style: str = "written"):
+    """
+    Transcribes the contents of a text file line by line using the specified dialect and style.
+
+    Args:
+        file: Path to the input text file to be transcribed.
+        dialect: Dialect code to use for transcription. Defaults to "e".
+        style: Style to use for transcription (e.g., "written"). Defaults to "written".
+
+    Returns:
+        dict: A dictionary containing the text ID and a mapping from line indices to their transcriptions.
+              Empty lines are mapped to empty lists.
+    """
     file = Path(file)
     text = file.read_text()
 
@@ -169,19 +190,17 @@ def transcribe_file(file: str | Path, dialect: str = "e", style: str = "written"
 
     for line_id, line in enumerate(textlines):
         if line == "":
-            annotations[f"line_{line_id}"] = []
+            annotations[f"line_{line_id}"] = []  # type: ignore
             continue
         transcriptions = transcribe(
             line, dialect=dialect, style=style, full_annotation=False
         )
-        annotations[f"line_{line_id}"] = list(transcriptions)
+        annotations[f"line_{line_id}"] = list(transcriptions)  # type: ignore
 
     return annotations
 
 
 if __name__ == "__main__":
-    # logging.basicConfig(level=logging.DEBUG)
-
     import argparse
     from pathlib import Path
 
