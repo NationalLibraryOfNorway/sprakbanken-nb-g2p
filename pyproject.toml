@@ -27,4 +27,4 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "--cov=nb_g2p --cov-report markdown-append:DEVELOPMENT.md"
+addopts = "--cov=nb_g2p --cov-report=term-missing --cov-report=markdown-append:DEVELOPMENT.md "
