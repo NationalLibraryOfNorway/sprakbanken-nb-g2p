@@ -10,12 +10,13 @@ Dette repoet inneholder G2P-modeller for norsk bokmål, som produserer fonemiske
 4. Trøndersk (`t`)
 5. Nordnorsk (`n`)
 
-
 ## Oppsett
+
 Følg installasjonsinstruksjoner fra [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus/tree/kaldi).
 Du trenger kun å kjøre koden i disse avsnittene:
+
 - "Next grab and install OpenFst-1.7.2"
--  "Checkout the latest Phonetisaurus from master and compile without bindings"
+- "Checkout the latest Phonetisaurus from master and compile without bindings"
 
 ## Data
 
@@ -27,19 +28,19 @@ Modellene og testdata kan lastes ned fra [release v2.0](https://github.com/Sprak
 Pakk dem ut og plasser mappene "data" og "models" i din lokale klone av dette repoet.
 
 ## Innhold
+
 - `models/`: inneholder modellene, samt andre filer Phonetisaurus bruker
-    - `nb_*.fst`: Modellene som kan kjøres med `phonetisaurus-apply`. Utfyllingen til `*` er en streng med dialekt og uttalevariant, f.eks. `e_spoken` eller `t_written`.
-    - `nb_*.o8.arpa`: 8-gram-modeller for fonemsekvenser som Phonetisaurus bruker i treningsprosessen.
-    - `nb_*.corpus`: Sammenstilte (eng. *aligned*) grafemer og fonemer fra leksikonene.
+  - `nb_*.fst`: Modellene som kan kjøres med `phonetisaurus-apply`. Utfyllingen til `*` er en streng med dialekt og uttalevariant, f.eks. `e_spoken` eller `t_written`.
+  - `nb_*.o8.arpa`: 8-gram-modeller for fonemsekvenser som Phonetisaurus bruker i treningsprosessen.
+  - `nb_*.corpus`: Sammenstilte (eng. *aligned*) grafemer og fonemer fra leksikonene.
 - `data/`: inneholder leksika for trening og testing, samt utdata fra modellene på testsettet.
-    - `NB-uttale_*_train.dict` er treningssettene for `models/nb_*.fst`. De inneholder 543 495 ortografi-transkripsjon-par (OTP), og utgjør 80% av alle unike OTP-er i leksikonet.
-    - `NB-uttale_*_test.dict` er testsettene for `models/nb_*.fst`. De inneholder de gjenstående 20% av OTP-ene i leksikonet, altså 135 787 OTP-er.
-    - `predicted_nb_*.dict` er testsettet med transkripsjoner predikert av modellene.
-    - `wordlist_test.txt` er ordlisten til testsettet, som modellen kjøres på og genererer transkripsjonsforslag for.
+  - `NB-uttale_*_train.dict` er treningssettene for `models/nb_*.fst`. De inneholder 543 495 ortografi-transkripsjon-par (OTP), og utgjør 80% av alle unike OTP-er i leksikonet.
+  - `NB-uttale_*_test.dict` er testsettene for `models/nb_*.fst`. De inneholder de gjenstående 20% av OTP-ene i leksikonet, altså 135 787 OTP-er.
+  - `predicted_nb_*.dict` er testsettet med transkripsjoner predikert av modellene.
+  - `wordlist_test.txt` er ordlisten til testsettet, som modellen kjøres på og genererer transkripsjonsforslag for.
 - `evaluate.py`: evalueringsskript som er implementert på nytt for å evaluere disse modellene.
 - `g2p_stats.py`: evalueringsskript fra V1.0, som kan brukes for å sammenligne disse modellene med NST-modellene (med og uten markering av trykk og tone) i versjon 1.
 - `LICENSE`: Lisensteksten for CC0, som denne ressursen distribueres med.
-
 
 ## Bruk
 
@@ -81,14 +82,12 @@ Med `-l`-argumentet kan du få statistikk for spesifikke modeller, f.eks. `-l e_
 | *nb_n_written.fst* | 13.736133357062347 | 1.98774986044724 |
 | *nb_n_spoken.fst* | 17.22590930999963 | 2.8209779677747715 |
 
-
-
 ### `g2p_stats.py`
 
 Regner ut WER og PER for to inputfiler:
+
 1. Referansefila /testdata, f.eks. `data/NB-uttale_e_spoken_test.dict`
 2. Modellens transkripsjonsforslag, f.eks. `output.txt` fra kommandoen i [Bruk](#bruk), eller `data/predicted_nb_e_spoken.dict`.
-
 
 - **WER** er antall feil transkripsjoner fordelt på totalt antall ord i modellens forslag. 1 feil = 1 ord.
 - **PER** er summen av PER for hver transkripsjon, fordelt på totalt antall ord i modellens forslag. 1 feil = 1 fonem.
@@ -123,6 +122,7 @@ NoFAbet er delvis basert på [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) og
 Tabellen nedenfor viser ekvivalente symboler for notasjonene X-SAMPA, IPA og NoFAbet.
 
 ### X-SAMPA-IPA-NoFAbet konverteringstabell
+
 X-SAMPA | IPA | NoFAbet | Example
 --- | --- | --- |---
 A: | ɑː | AA0 | b**a**d
