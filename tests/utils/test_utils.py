@@ -11,11 +11,9 @@ class DummyPhonetisaurus:
         return [(word, [f"{word}_PH"]) for word in words]
 
 
-class DummyConvertNofabet:
-    @staticmethod
-    def nofabet_to_syllables(transcription):
-        # Split on spaces as dummy syllables
-        return transcription.split()
+def dummy_nofabet_to_syllables(transcription):
+    # Split on spaces as dummy syllables
+    return transcription.split()
 
 
 def dummy_nofabet_to_ipa(nofabet):
@@ -25,7 +23,7 @@ def dummy_nofabet_to_ipa(nofabet):
 @pytest.fixture(autouse=True)
 def patch_dependencies(monkeypatch):
     monkeypatch.setattr(utils, "phonetisaurus", DummyPhonetisaurus)
-    monkeypatch.setattr(utils, "convert_nofabet", DummyConvertNofabet)
+    monkeypatch.setattr(utils, "nofabet_to_syllables", dummy_nofabet_to_syllables)
     monkeypatch.setattr(utils, "nofabet_to_ipa", dummy_nofabet_to_ipa)
     # Patch download_g2p_model to avoid file IO
     monkeypatch.setattr(
