@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Generator, Iterable
 
 import phonetisaurus
-from convert_pa import convert_nofabet, nofabet_to_ipa
+from convert_pa import nofabet_to_ipa, nofabet_to_syllables
 from google.cloud import storage
 
 PUNCTUATION_MARKS = str(
@@ -111,7 +111,7 @@ def convert_to_syllables(phonemes: list, ipa: bool = False) -> list:
         ipa_text = nofabet_to_ipa(transcription)
         syllables = ipa_text.split(".")
     else:
-        syllables = convert_nofabet.nofabet_to_syllables(transcription)
+        syllables = nofabet_to_syllables(transcription)
     return syllables
 
 
@@ -131,7 +131,7 @@ def annotate_transcriptions(transcription: list) -> Generator:
         yield dict(
             word=word,
             nofabet=nofabet,
-            syllables=convert_nofabet.nofabet_to_syllables(nofabet),
+            syllables=nofabet_to_syllables(nofabet),
             ipa=nofabet_to_ipa(nofabet),
         )
 

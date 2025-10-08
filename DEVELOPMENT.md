@@ -19,6 +19,9 @@ Run tests with pytest:
 
 ## Coverage
 
+> **Don't add any text below this section!**
+> The table below is automatically appended when running pytest.
+
 | Name                        |    Stmts |     Miss |   Cover |
 |---------------------------- | -------: | -------: | ------: |
 | src/nb\_g2p/\_\_init\_\_.py |        1 |        0 |    100% |
