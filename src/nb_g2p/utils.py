@@ -211,7 +211,6 @@ def transcribe_file(file: str | Path, dialect: str = "e", style: str = "written"
 
 if __name__ == "__main__":
     import argparse
-    from pathlib import Path
 
     parser = argparse.ArgumentParser(
         description="Transcribe a text using a pre-trained g2p model."
