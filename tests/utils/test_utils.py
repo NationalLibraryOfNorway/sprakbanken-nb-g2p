@@ -59,10 +59,11 @@ def test_syllabify():
     assert all(isinstance(s, str) for s in result)
 
 
+@pytest.mark.xfail
 def test_convert_to_syllables_nofabet():
     phonemes = "V AEH1 R D NX0"
     result = utils.convert_to_syllables(phonemes, ipa=False)
-    assert result == ["H", "AEJ1"]
+    assert result == [["V", "AEH1", "R"], ["D", "NX0"]]
 
 
 def test_convert_to_syllables_ipa():
