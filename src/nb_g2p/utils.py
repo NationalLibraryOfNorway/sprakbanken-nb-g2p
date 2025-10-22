@@ -104,7 +104,7 @@ def syllabify(transcription: list[list]) -> list:
     return syllables
 
 
-def convert_to_syllables(phonemes: list, ipa: bool = False) -> list:
+def convert_to_syllables(phonemes: list | str, ipa: bool = False) -> list:
     """Turn a sequence of phonemes into syllable groups."""
     transcription = phonemes if isinstance(phonemes, str) else " ".join(phonemes)
     if ipa:
