@@ -1,6 +1,6 @@
 [project]
 name = "nb_g2p"
-version = "2.0.1"
+version = "2.1.1"
 description = "Transcribe Norwegian dialects phonemically from bokmål text."
 authors = [
     {name = "Språkbanken", email = "sprakbanken@nb.no"},
