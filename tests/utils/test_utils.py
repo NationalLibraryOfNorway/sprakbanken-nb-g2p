@@ -60,22 +60,22 @@ def test_syllabify():
 
 
 def test_convert_to_syllables_nofabet():
-    phonemes = ["h", "ei"]
+    phonemes = "V AEH1 R D NX0"
     result = utils.convert_to_syllables(phonemes, ipa=False)
-    assert result == ["h", "ei"]
+    assert result == ["H", "AEJ1"]
 
 
 def test_convert_to_syllables_ipa():
     # Should call dummy_nofabet_to_ipa and split on "."
-    phonemes = ["h", "ei"]
+    phonemes = ["V", "AEH1", "R", "D", "NX0"]
 
     # Patch nofabet_to_ipa to return a string with dots
     def fake_nofabet_to_ipa(nofabet):
-        return "h.ei"
+        return "'vær.dn̩"
 
     utils.nofabet_to_ipa = fake_nofabet_to_ipa
     result = utils.convert_to_syllables(phonemes, ipa=True)
-    assert result == ["h", "ei"]
+    assert result == ["'vær", "dn̩"]
 
 
 def test_transcribe_basic():
@@ -96,7 +96,7 @@ def test_transcribe_full_annotation():
 
 
 def test_annotate_transcriptions():
-    transcription = [("hei", ["h", "ei"])]
+    transcription = [("hei", ["H", "AEJ1"])]
     result = list(utils.annotate_transcriptions(transcription))
     assert isinstance(result[0], dict)
     assert result[0]["word"] == "hei"
