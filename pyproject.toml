@@ -7,7 +7,7 @@ authors = [
     {name = "Ingerid Dale", email = "ingerid.dale@nb.no"},
     {name = "Marie Iversdatter Røsok", email = "marie.rosok@nb.no" }
 ]
-dependencies = ["Levenshtein", "convert-pa", "google-cloud-storage", "phonetisaurus"]
+dependencies = ["Levenshtein", "convert-pa>=1.0.0", "google-cloud-storage", "phonetisaurus"]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "CC0"}
@@ -27,4 +27,4 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "--cov=nb_g2p --cov-report=term-missing --cov-report=markdown-append:DEVELOPMENT.md "
+addopts = "--cov=nb_g2p --cov-report=term-missing"
